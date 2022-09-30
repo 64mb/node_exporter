@@ -1,0 +1,15 @@
+[Unit]
+Description=Prometheus Node Exporter
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=node_exporter
+Group=node_exporter
+Type=simple
+ExecStart=/usr/local/bin/node_exporter --web.config=/etc/node_exporter/web.yml --collector.time --collector.stat --collector.netstat --collector.netdev --collector.diskstats --collector.cpu --collector.meminfo --collector.loadavg --collector.filesystem --collector.systemd --collector.processes
+Restart=always
+RestartSec=30
+
+[Install]
+WantedBy=multi-user.target
